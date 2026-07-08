@@ -1,27 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Coletas Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .aba { display: none; }
+        .aba.ativa { display: flex; }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 min-h-screen flex flex-col">
+
+    <!-- BARRA DE NAVEGAÇÃO -->
+    <div class="bg-slate-800 p-2 flex justify-around text-white text-xs font-bold sticky top-0 z-50 shadow-md">
+        <button onclick="mudarAba('cliente')" id="btn-cliente" class="bg-blue-600 px-3 py-2 rounded-lg">1. CLIENTE</button>
+        <button onclick="mudarAba('motorista')" id="btn-motorista" class="bg-slate-700 px-3 py-2 rounded-lg">2. MOTORISTA</button>
+        <button onclick="mudarAba('admin')" id="btn-admin" class="bg-slate-700 px-3 py-2 rounded-lg">3. ADMIN</button>
+    </div>
+
+    <!-- TELA 1: CLIENTE -->
+    <div id="aba-cliente" class="aba ativa flex-col justify-between flex-grow">
+        <header class="bg-gradient-to-r from-blue-600 to-emerald-600 text-white text-center py-6 shadow-md rounded-b-3xl">
+            <h1 class="text-2xl font-bold tracking-wide">EcoColeta</h1>
+            <p class="text-sm text-blue-100 mt-1">Sua coleta residencial a um clique</p>
+        </header>
+        <main class="p-6 max-w-md mx-auto w-full flex-grow space-y-4">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <h2 class="text-xl font-semibold text-slate-700 mb-5 text-center">Nova Solicitação</h2>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Nome Completo</label>
+                        <input type="text" placeholder="Ex: João Silva" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Endereço de Coleta</label>
+                        <input type="text" placeholder="Rua, número, bairro" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Data Disponível</label>
+                            <input type="date" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Horário</label>
+                            <select class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm">
+                                <option>Manhã (08h às 12h)</option>
+                                <option>Tarde (13h às 18h)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" class="w-full bg-emerald-500 text-white font-semibold py-3.5 px-4 rounded-xl text-sm mt-4">Confirmar Agendamento</button>
+                </form>
+            </div>
+            <button type="button" class="w-full bg-red-600 text-white font-bold py-3.5 px-4 rounded-xl text-xs shadow-lg">⏰ Motorista está atrasado? Avise a Central</button>
+        </main>
+    </div>
+
+    <!-- TELA 2: MOTORISTA -->
+    <div id="aba-motorista" class="aba flex-col justify-between flex-grow bg-slate-900 text-slate-100 hidden">
+        <header class="bg-slate-800 p-5 border-b border-slate-700">
+            <div class="max-w-md mx-auto text-left">
+                <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider">Painel do Operador</span>
+                <div class="mt-1">
+                    <label class="block text-xs text-slate-400 mb-1">Selecione seu Nome:</label>
+                    <select class="bg-slate-700 text-xl font-bold text-white block w-full p-2.5 rounded-xl border border-slate-600">
+                        <option>Geraldo</option>
+                        <option>Albertino</option>
+                        <option>Ailton</option>
+                        <option>Apoio</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+        <main class="p-5 max-w-md mx-auto w-full flex-grow space-y-4">
+            <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-xl space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Veículo Designado:</label>
+                    <select class="w-full bg-slate-700 p-3 text-sm text-white rounded-xl border border-slate-600 font-medium">
+                        <option>Volkswagen (Caçamba Roll-On) - NYC42C</option>
+                        <option>Mercedes-Benz (Caçamba Poliguindaste) - LPR1L48</option>
+                        <option>Caminhão 3/4 Accelo - OQN-0521</option>
+                        <option>Fiat Fiorino - PWG8G41</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <button class="bg-blue-600 text-white py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md">A Caminho</button>
+                    <button class="bg-emerald-600 text-white py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md">Finalizar Coleta</button>
+                </div>
+            </div>
+            <button class="w-full bg-red-600 text-white py-4 rounded-xl text-xs font-bold uppercase tracking-wider shadow-lg">⚠️ Chame o suporte quando precisar</button>
+        </main>
+    </div>
+
+    <!-- TELA 3: ADMINISTRADOR -->
+    <div id="aba-admin" class="aba flex-col justify-between flex-grow hidden bg-slate-100">
+        <nav class="bg-slate-800 text-white p-4 font-bold text-center shadow-md">
+            Central de Monitoramento Admin
+        </nav>
+        <main class="p-6 max-w-md mx-auto w-full space-y-4 flex-grow">
+            <div class="bg-white p-4 rounded-xl border-l-4 border-red-600 shadow-sm text-center font-bold text-red-600 uppercase tracking-wide text-sm">
+                🚨 1 Motorista com Alerta de Atraso
+            </div>
+            <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-3">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Status da Frota em Tempo Real</h3>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center text-xs">
+                    <span><b>Geraldo:</b> VW (Caçamba Roll-On) - NYC42C</span>
+                    <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-1 rounded-md">OK</span>
+                </div>
+                <div class="p-3 bg-red-50 rounded-xl border border-red-100 flex justify-between items-center text-xs">
+                    <span class="text-red-900"><b>Albertino:</b> MB (Caçamba Poliguindaste) - LPR1L48</span>
+                    <span class="bg-red-600 text-white font-bold px-2 py-1 rounded-md">ATRASADO</span>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center text-xs">
+                    <span><b>Ailton:</b> Caminhão 3/4 Accelo - OQN-0521</span>
+                    <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-1 rounded-md">OK</span>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center text-xs">
+                    <span><b>Apoio:</b> Fiat Fiorino - PWG8G41</span>
+                    <span class="bg-slate-300 text-slate-700 font-bold px-2 py-1 rounded-md">PÁTIO</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
     <!-- LOGICA DE ALTERNANCIA DAS ABAS -->
     <script>
         function mudarAba(abaDestino) {
-            // Esconde todas as abas
             document.querySelectorAll('.aba').forEach(aba => {
                 aba.classList.add('hidden');
                 aba.classList.remove('ativa', 'flex');
             });
 
-            // Reseta a cor de todos os botões da barra de navegação
             const botoes = document.querySelectorAll('div.sticky button');
             botoes.forEach(btn => {
                 btn.classList.remove('bg-blue-600');
                 btn.classList.add('bg-slate-700');
             });
 
-            // Mostra a aba selecionada
             const abaAtiva = document.getElementById('aba-' + abaDestino);
             if (abaAtiva) {
                 abaAtiva.classList.remove('hidden');
                 abaAtiva.classList.add('ativa', 'flex');
             }
 
-            // Ativa o destaque no botão correto usando o ID dele
             const botaoAtivo = document.getElementById('btn-' + abaDestino);
             if (botaoAtivo) {
                 botaoAtivo.classList.remove('bg-slate-700');
@@ -29,3 +151,5 @@
             }
         }
     </script>
+</body>
+</html>
