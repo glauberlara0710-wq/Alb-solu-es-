@@ -1,26 +1,31 @@
+    <!-- LOGICA DE ALTERNANCIA DAS ABAS -->
+    <script>
+        function mudarAba(abaDestino) {
+            // Esconde todas as abas
+            document.querySelectorAll('.aba').forEach(aba => {
+                aba.classList.add('hidden');
+                aba.classList.remove('ativa', 'flex');
+            });
 
-<!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ALB Soluções Ambientais</title>
-<style>
-body{margin:0;font-family:Segoe UI,Arial;background:#f4f7f9;color:#222}
-.hero{background:linear-gradient(135deg,#0b6b3a,#1ea362);color:#fff;padding:60px;text-align:center}
-.btn{display:inline-block;background:#fff;color:#0b6b3a;padding:14px 24px;border-radius:30px;text-decoration:none;margin:8px;font-weight:bold}
-.wrap{max-width:1200px;margin:auto;padding:30px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 14px rgba(0,0,0,.12)}
-img{width:100%;border-radius:12px}
-.small{color:#666}
-</style></head><body>
-<section class="hero"><h1>ALB Soluções Ambientais</h1>
-<p>37 anos atendendo Belo Horizonte e Região Metropolitana.</p>
-<a class="btn" href="cliente.html">Portal do Cliente</a>
-<a class="btn" href="motorista.html">Portal do Motorista</a>
-<a class="btn" href="admin.html">Painel Administrativo</a>
-</section>
-<div class="wrap">
-<div class="grid">
-<div class="card"><img src="https://placehold.co/600x350?text=Residuos+Organizados"><h3>Resíduos Organizados</h3><p class="small">Substitua por fotos reais de resíduos contaminados, sucatas e armazenamento.</p></div>
-<div class="card"><img src="https://placehold.co/600x350?text=Caminhao+de+Coleta"><h3>Frota</h3><p class="small">Fotos dos caminhões da ALB.</p></div>
-<div class="card"><h3>Fluxo</h3><ol><li>Cliente agenda.</li><li>ADM aprova.</li><li>Sistema define caminhão e motorista.</li><li>Motorista confirma.</li><li>ADM acompanha em tempo real.</li></ol></div>
-</div>
-</div></body></html>
+            // Reseta a cor de todos os botões da barra de navegação
+            const botoes = document.querySelectorAll('div.sticky button');
+            botoes.forEach(btn => {
+                btn.classList.remove('bg-blue-600');
+                btn.classList.add('bg-slate-700');
+            });
+
+            // Mostra a aba selecionada
+            const abaAtiva = document.getElementById('aba-' + abaDestino);
+            if (abaAtiva) {
+                abaAtiva.classList.remove('hidden');
+                abaAtiva.classList.add('ativa', 'flex');
+            }
+
+            // Ativa o destaque no botão correto usando o ID dele
+            const botaoAtivo = document.getElementById('btn-' + abaDestino);
+            if (botaoAtivo) {
+                botaoAtivo.classList.remove('bg-slate-700');
+                botaoAtivo.classList.add('bg-blue-600');
+            }
+        }
+    </script>
